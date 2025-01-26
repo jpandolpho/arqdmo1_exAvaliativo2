@@ -44,28 +44,33 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         return opcao
     }
 
-    fun getCountOfOpcao(opcao: String): Int {
-        val count: Int
+    fun getCountOfOpcao(): List<Pair<String, Int>> {
         val db = dbHelper.readableDatabase
 
-        val where = "${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO} = ?"
-        val whereArgs = arrayOf(opcao)
+        val columns = arrayOf(
+            DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO,
+            "COUNT(${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO})"
+        )
 
         val cursor = db.query(
             DatabaseHelper.DATABASE_KEYS.TB_VOTO,
-            arrayOf("COUNT(*)"),
-            where,
-            whereArgs,
+            columns,
             null,
+            null,
+            "GROUP BY ${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO}",
             null,
             null
         )
+        val dados = mutableListOf<Pair<String, Int>>()
 
         cursor.use {
-            cursor.moveToNext()
-            count = cursor.getInt(0)
+            while (it.moveToNext()) {
+                val column = it.getString(0)
+                val count = it.getInt(1)
+                dados.add(Pair(column, count))
+            }
         }
 
-        return count
+        return dados
     }
 }
