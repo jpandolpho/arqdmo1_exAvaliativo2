@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">PesquisaOpinião</string>
+    <string name="titulo">Pesquisa de Opinião</string>
+    <string name="participate">Participar da Pesquisa</string>
+    <string name="check">Checar meu Voto</string>
+    <string name="finish">Finalizar</string>
+    <string name="user_title">Insira suas informações</string>
+    <string name="prontuario">Prontuário</string>
+    <string name="full_name">Nome Completo</string>
+    <string name="vote">Votar</string>
+    <string name="back">Voltar</string>
+    <string name="pick_vote">Escolha seu Voto</string>
+    <string name="otimo">Ótimo</string>
+    <string name="bom">Bom</string>
+    <string name="regular">Regular</string>
+    <string name="ruim">Ruim</string>
+    <string name="results">Resultado</string>
+    <string name="check_vote">Checar</string>
+    <string name="verification_code">Codigo de Verificação</string>
 </resources>
