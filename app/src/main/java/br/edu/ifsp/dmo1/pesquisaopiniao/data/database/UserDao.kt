@@ -5,7 +5,7 @@ import br.edu.ifsp.dmo1.pesquisaopiniao.data.model.User
 
 class UserDao(private val dbHelper: DatabaseHelper) {
 
-    fun insert(user: User){
+    fun insert(user: User) {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
             put(DatabaseHelper.DATABASE_KEYS.USER_COL_PRONTUARIO, user.prontuario)
@@ -15,7 +15,7 @@ class UserDao(private val dbHelper: DatabaseHelper) {
     }
 
     fun getCount(): Int {
-        val count : Int
+        val count: Int
         val db = dbHelper.readableDatabase
 
         val cursor = db.query(
@@ -28,14 +28,14 @@ class UserDao(private val dbHelper: DatabaseHelper) {
             null
         )
 
-        cursor.use{
+        cursor.use {
             cursor.moveToNext()
             count = cursor.getInt(0)
         }
         return count
     }
 
-    fun getByProntuario(prontuario:String): Boolean{
+    fun getByProntuario(prontuario: String): Boolean {
         val existe: Boolean
         val db = dbHelper.readableDatabase
 
@@ -54,7 +54,7 @@ class UserDao(private val dbHelper: DatabaseHelper) {
             null
         )
 
-        cursor.use{
+        cursor.use {
             existe = cursor.moveToNext()
         }
 

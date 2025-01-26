@@ -5,7 +5,7 @@ import br.edu.ifsp.dmo1.pesquisaopiniao.data.model.Voto
 
 class VotoDao(private val dbHelper: DatabaseHelper) {
 
-    fun insert(voto: Voto){
+    fun insert(voto: Voto) {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
             put(DatabaseHelper.DATABASE_KEYS.VOTO_COL_CODIGO, voto.codigo)
@@ -14,8 +14,8 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         db.insert(DatabaseHelper.DATABASE_KEYS.TB_VOTO, null, values)
     }
 
-    fun getByCodigo(codigo: String) : String?{
-        val opcao : String?
+    fun getByCodigo(codigo: String): String? {
+        val opcao: String?
         val db = dbHelper.readableDatabase
 
         val columns = arrayOf(DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO)
@@ -33,10 +33,10 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
             null
         )
 
-        cursor.use{
-            opcao = if(cursor.moveToNext()){
+        cursor.use {
+            opcao = if (cursor.moveToNext()) {
                 cursor.getString(0)
-            }else{
+            } else {
                 null
             }
         }
@@ -44,8 +44,8 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         return opcao
     }
 
-    fun getCountOfOpcao(opcao: String) : Int{
-        val count : Int
+    fun getCountOfOpcao(opcao: String): Int {
+        val count: Int
         val db = dbHelper.readableDatabase
 
         val where = "${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO} = ?"
@@ -61,7 +61,7 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
             null
         )
 
-        cursor.use{
+        cursor.use {
             cursor.moveToNext()
             count = cursor.getInt(0)
         }

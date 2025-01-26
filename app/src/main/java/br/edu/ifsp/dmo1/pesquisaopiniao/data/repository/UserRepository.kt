@@ -12,7 +12,7 @@ class UserRepository(context: Context) {
 
     fun inserirUser(user: User) = dao.insert(user)
 
-    fun getUserByProntuario(prontuario:String) = dao.getByProntuario(prontuario)
+    fun getUserByProntuario(prontuario: String) = dao.getByProntuario(prontuario)
 
     fun getContagem() = dao.getCount()
 }

@@ -12,7 +12,7 @@ class VotoRepository(context: Context) {
 
     fun inserirVoto(voto: Voto) = dao.insert(voto)
 
-    fun getVotoByCodigo(codigo:String) = dao.getByCodigo(codigo)
+    fun getVotoByCodigo(codigo: String) = dao.getByCodigo(codigo)
 
-    fun getContagemByOpcao(opcao:String) = dao.getCountOfOpcao(opcao)
+    fun getContagemByOpcao(opcao: String) = dao.getCountOfOpcao(opcao)
 }
