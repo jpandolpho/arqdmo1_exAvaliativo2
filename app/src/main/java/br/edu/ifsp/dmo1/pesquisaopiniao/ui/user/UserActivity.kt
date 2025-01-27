@@ -62,7 +62,7 @@ class UserActivity : AppCompatActivity() {
         }
 
         //Para fins de avaliação, o aluno Gabriel Ventura me mostrou o aplicativo dele.
-        //Vi ele usando essa funcionalidade de copiar o código ao apertar um botão e achei uma ótima ideia
+        //Vi ele usando essa funcionalidade de copiar o código ao apertar um botão e achei uma ótima ideia.
         //Resolvi, então, implementar esta funcionalidade.
         binding.copyCode.setOnClickListener {
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -119,6 +119,14 @@ class UserActivity : AppCompatActivity() {
 
         viewModel.codigo.observe(this, Observer {
             binding.textCodigo.text = it
+            val prontuario = binding.textProntuario.text.toString()
+            val nome = binding.textNome.text.toString()
+            val opcao = binding.textOpcao.text.toString()
+            viewModel.registerParticipation(prontuario, nome, opcao, it)
+        })
+
+        viewModel.added.observe(this, Observer {
+            Toast.makeText(this, "Voto registrado com sucesso!", Toast.LENGTH_SHORT).show()
         })
     }
 }

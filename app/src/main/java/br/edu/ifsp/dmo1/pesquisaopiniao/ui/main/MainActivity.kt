@@ -3,9 +3,6 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +14,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var userVoteResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         setupObservers()
         setupListeners()
-        setupLauncher()
     }
 
     private fun setupObservers() {
-        viewModel.added.observe(this, Observer {
-            Toast.makeText(this, "Voto registrado com sucesso!", Toast.LENGTH_SHORT).show()
-        })
-
         viewModel.contagem.observe(this, Observer {
             if (it.equals("Vazio")) {
                 Toast.makeText(
@@ -54,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.buttonParticipar.setOnClickListener {
             val mIntent = Intent(this, UserActivity::class.java)
-            userVoteResultLauncher.launch(mIntent)
+            startActivity(mIntent)
         }
         binding.buttonChecar.setOnClickListener {
             val mIntent = Intent(this, ResultActivity::class.java)
@@ -63,20 +54,5 @@ class MainActivity : AppCompatActivity() {
         binding.buttonFinalizar.setOnClickListener {
             viewModel.launchResults()
         }
-    }
-
-    private fun setupLauncher() {
-        userVoteResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback {
-                if (it.resultCode == RESULT_OK) {
-                    val prontuario = it.data?.getStringExtra("prontuario") ?: ""
-                    val nome = it.data?.getStringExtra("nome") ?: ""
-                    val codigo = it.data?.getStringExtra("codigo") ?: ""
-                    val opcao = it.data?.getStringExtra("opcao") ?: ""
-                    viewModel.registerNewVote(prontuario, nome, codigo, opcao)
-                }
-            }
-        )
     }
 }
