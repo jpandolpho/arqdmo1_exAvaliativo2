@@ -16,6 +16,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         userRepository = UserRepository(application)
     }
 
+    //Puxando do banco de dados quantos usuários estão registrados e, por consequência,
+    //quantos votos existem no sistema.
+    //É utilizado um LiveData de String para facilitar a passagem de informações
+    //para a ResultActivity.
     fun launchResults() {
         val count: Int = userRepository.getContagem()
         if (count > 0) {

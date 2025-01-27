@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityUserBinding
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.vote.VoteActivity
 
+//Esta view é utilizada tanto para o preenchimento de dados do usuário,
+//quanto para mostrar o código de validão referente ao voto dele.
 class UserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserBinding
     private lateinit var viewModel: UserViewModel
@@ -36,9 +38,11 @@ class UserActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.buttonVotar.setOnClickListener {
             val prontuario = binding.textProntuario.text.toString()
+            //Verificamos se o prontuário digitado já está no banco
             if (prontuario.isNotEmpty()) {
                 viewModel.checkExistence(prontuario)
             } else {
+                //Caso o campo esteja vazio, mostramos um Toast.
                 showBlankFieldsToast()
             }
         }
@@ -67,6 +71,8 @@ class UserActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
                 if (it.resultCode == RESULT_OK) {
+                    //Quando retornamos pelo resultLauncher para esta activity, trazemos
+                    //a opção de voto do usuário.
                     val opcao = it.data?.getStringExtra("opcao") ?: ""
                     setupCodeView(opcao)
                 }
@@ -74,6 +80,8 @@ class UserActivity : AppCompatActivity() {
         )
     }
 
+    //Quando retornamos da VoteActivity com um resultado positivo, precisamos ajustar a View.
+    //Ajustamos a visibilidade dos elementos e alteramos o título.
     private fun setupCodeView(opcao: String) {
         binding.textlayoutProntuario.visibility = View.GONE
         binding.textlayoutNome.visibility = View.GONE
@@ -84,10 +92,14 @@ class UserActivity : AppCompatActivity() {
         binding.copyCode.visibility = View.VISIBLE
         binding.userTitle.text = "CÓDIGO DE VERIFICAÇÃO"
 
+        //Após ajustarmos as visibilidades, geramos o código.
         viewModel.getCodigo()
     }
 
     private fun setupObservers() {
+        //Caso o prontuário já esteja presente no banco, lançamos um toast.
+        //Caso contrário, verificamos se os campos são válidos e então lançamos
+        //por resultLauncher um intenção, que nos trará a opção de voto.
         viewModel.existe.observe(this, Observer {
             if (it) {
                 Toast.makeText(this, "A pessoa com este prontuario já votou.", Toast.LENGTH_SHORT)
@@ -103,6 +115,7 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
+        //Após gerarmos o código, adicionamos ele a view e então registramos o voto e o usuário.
         viewModel.codigo.observe(this, Observer {
             binding.textCodigo.text = it
             val prontuario = binding.textProntuario.text.toString()

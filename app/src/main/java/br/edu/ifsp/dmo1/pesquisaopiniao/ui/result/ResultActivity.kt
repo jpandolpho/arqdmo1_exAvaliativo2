@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.edu.ifsp.dmo1.pesquisaopiniao.R
 import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityResultBinding
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.vote.VoteActivity
 
@@ -29,6 +30,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        //Fazendo a verificação se um código inserido existe no sistema.
         binding.buttonCheck.setOnClickListener {
             val codigo = binding.textCodigo.text.toString()
             viewModel.checkCodigo(codigo)
@@ -39,14 +41,23 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
+    //Esta view é reutilizada para tanto mostrar resultados gerais, quanto para fazer a
+    // verificação do código de validação.
     private fun verifyBundle() {
+        //Caso o bundle chegue com dados, queremos exibir a lista de resultados.
         if (intent.extras != null) {
             setupRecyclerView()
+            //Desempacotando a quantidade de votos(já em String)
             val count = intent.getStringExtra("contagem")
-            val text = binding.voteCount.text.toString()
-            binding.voteCount.text = "$text $count"
+            //Exibindo contagem de votos
+            binding.voteCount.text = "${R.string.vote_count} $count"
+            //Carregando lista com os votos existentes no sistema.
             viewModel.load()
         } else {
+            //Caso o bundle venha vazio, significa que queremos fazer a verificação
+            //de um código de validação.
+
+            //Mudamos título da página e alteramos a visibilidade de elementos.
             binding.resultsTitle.text = "INSIRA SEU CÓDIGO"
             binding.voteCount.visibility = View.GONE
             binding.listVotes.visibility = View.GONE
@@ -64,13 +75,17 @@ class ResultActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.results.observe(this, Observer {
+            //Mandando para o adapter a lista de dados vindo do banco.
             adapter.loadData(it)
         })
 
         viewModel.opcao.observe(this, Observer {
+            //Caso o usuário deixe o campo em branco ou coloque um código inválido,
+            //mostramos um Toast.
             if (it.isEmpty()) {
                 Toast.makeText(this, "Código inválido.", Toast.LENGTH_SHORT).show()
             } else {
+                //Senão, colocamos na intent a opção referente ao código digitado e lançamos a atividade.
                 val mIntent = Intent(this, VoteActivity::class.java)
                 mIntent.putExtra("opcao", it)
                 startActivity(mIntent)

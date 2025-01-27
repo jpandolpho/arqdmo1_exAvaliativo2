@@ -23,6 +23,7 @@ class ResultViewModel(application: Application) : AndroidViewModel(application) 
         _results.value = votoRepository.getContagemByOpcao()
     }
 
+    //Caso o retorno do banco seja null, atribuímos uma string vazia.
     fun checkCodigo(codigo: String) {
         _opcao.value = votoRepository.getVotoByCodigo(codigo) ?: ""
     }

@@ -10,6 +10,13 @@ import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityMainBinding
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.result.ResultActivity
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.user.UserActivity
 
+//Não foi utilizado nenhum resultLauncher na MainActivity.
+/*Inicialmente, era utilizado um resultLauncher para a UserActivity,
+pois os votos(tanto usuário, como o voto em si) eram salvos pela MainActivity, necessitando assim
+que ela recebesse resultados.
+Porém, foi identificado que, ao votar e chegar na tela onde o código de validação do voto era exibido,
+caso o usuário utilizasse o botão de retornar do sistema operacional, as informações não eram salvas.
+Assim, o app foi ajustado para que o salvamento seja feito quando o código de validação é exibido na tela.*/
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.contagem.observe(this, Observer {
+            //Caso it venha como "Vazio", quer dizer que não foram encontrados votos no banco.
             if (it.equals("Vazio")) {
                 Toast.makeText(
                     this,
