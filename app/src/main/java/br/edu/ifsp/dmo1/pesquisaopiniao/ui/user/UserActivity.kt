@@ -44,20 +44,6 @@ class UserActivity : AppCompatActivity() {
         }
 
         binding.buttonVoltar.setOnClickListener {
-            val prontuario = binding.textProntuario.text.toString()
-            val nome = binding.textNome.text.toString()
-            val codigo = binding.textCodigo.text
-            val opcao = binding.textOpcao.text
-            if (prontuario.isNotEmpty() && nome.isNotEmpty() && codigo.isNotEmpty() && opcao.isNotEmpty()) {
-                val mIntent = Intent()
-                mIntent.putExtra("prontuario", prontuario)
-                mIntent.putExtra("nome", nome)
-                mIntent.putExtra("codigo", codigo)
-                mIntent.putExtra("opcao", opcao)
-                setResult(RESULT_OK, mIntent)
-            } else {
-                setResult(RESULT_CANCELED)
-            }
             finish()
         }
 
