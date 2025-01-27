@@ -57,7 +57,7 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
             columns,
             null,
             null,
-            "GROUP BY ${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO}",
+            "${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO}",
             null,
             null
         )

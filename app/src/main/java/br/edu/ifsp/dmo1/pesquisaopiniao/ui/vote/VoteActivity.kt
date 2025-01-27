@@ -2,6 +2,7 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.vote
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,19 @@ class VoteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupListerners()
+        verifyBundle()
+    }
+
+    private fun verifyBundle() {
+        if(intent.extras != null){
+            binding.radioGroup.visibility = View.GONE
+            binding.buttonVotar.visibility = View.GONE
+
+            binding.textVoto.visibility = View.VISIBLE
+            val opcao = intent.getStringExtra("opcao")
+            binding.textVoto.text = opcao
+            binding.voteTitle.text = "SEU VOTO FOI:"
+        }
     }
 
     private fun setupListerners() {
