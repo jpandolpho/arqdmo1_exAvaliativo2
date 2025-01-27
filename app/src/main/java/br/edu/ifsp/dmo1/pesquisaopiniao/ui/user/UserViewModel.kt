@@ -7,22 +7,22 @@ import androidx.lifecycle.MutableLiveData
 import br.edu.ifsp.dmo1.pesquisaopiniao.data.repository.UserRepository
 import br.edu.ifsp.dmo1.pesquisaopiniao.data.repository.VotoRepository
 
-class UserViewModel(application: Application): AndroidViewModel(application) {
+class UserViewModel(application: Application) : AndroidViewModel(application) {
     private var userRepository: UserRepository
     private var votoRepository: VotoRepository
 
     private val _existe = MutableLiveData<Boolean>()
-    val existe : LiveData<Boolean> = _existe
+    val existe: LiveData<Boolean> = _existe
 
     private val _codigo = MutableLiveData<String>()
-    val codigo : LiveData<String> = _codigo
+    val codigo: LiveData<String> = _codigo
 
-    init{
+    init {
         userRepository = UserRepository(application)
         votoRepository = VotoRepository(application)
     }
 
-    fun checkExistence(prontuario:String){
+    fun checkExistence(prontuario: String) {
         _existe.value = userRepository.getUserByProntuario(prontuario)
     }
 

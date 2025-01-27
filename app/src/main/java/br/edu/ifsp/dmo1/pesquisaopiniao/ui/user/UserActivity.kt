@@ -7,16 +7,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import br.edu.ifsp.dmo1.pesquisaopiniao.R
 import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityUserBinding
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.vote.VoteActivity
 

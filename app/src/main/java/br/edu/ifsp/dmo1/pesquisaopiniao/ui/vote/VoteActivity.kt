@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import br.edu.ifsp.dmo1.pesquisaopiniao.R
 import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityVoteBinding
 
 class VoteActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityVoteBinding
+    private lateinit var binding: ActivityVoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +21,7 @@ class VoteActivity : AppCompatActivity() {
     }
 
     private fun verifyBundle() {
-        if(intent.extras != null){
+        if (intent.extras != null) {
             binding.radioGroup.visibility = View.GONE
             binding.buttonVotar.visibility = View.GONE
 
@@ -40,16 +36,16 @@ class VoteActivity : AppCompatActivity() {
         binding.buttonVotar.setOnClickListener {
             val checked = binding.radioGroup.checkedRadioButtonId
 
-            if(checked!=-1){
+            if (checked != -1) {
                 val selected = findViewById<RadioButton>(checked)
                 val opcao = selected.text.toString()
 
                 val mIntent = Intent()
-                mIntent.putExtra("opcao",opcao)
-                setResult(RESULT_OK,mIntent)
+                mIntent.putExtra("opcao", opcao)
+                setResult(RESULT_OK, mIntent)
                 finish()
-            }else{
-                Toast.makeText(this,"Escolha uma opção.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Escolha uma opção.", Toast.LENGTH_SHORT).show()
             }
         }
 
