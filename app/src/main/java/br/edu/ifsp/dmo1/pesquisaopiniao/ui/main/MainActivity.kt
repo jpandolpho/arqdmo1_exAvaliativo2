@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import br.edu.ifsp.dmo1.pesquisaopiniao.R
 import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityMainBinding
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.result.ResultActivity
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         setupObservers()
         setupListeners()
