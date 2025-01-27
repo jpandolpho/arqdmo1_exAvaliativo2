@@ -14,6 +14,8 @@ class UserDao(private val dbHelper: DatabaseHelper) {
         db.insert(DatabaseHelper.DATABASE_KEYS.TB_USER, null, values)
     }
 
+    //Contagem de quantos usuários votaram e, por conseguencia
+    //quantos votos a pesquisa teve.
     fun getCount(): Int {
         val count: Int
         val db = dbHelper.readableDatabase
@@ -35,6 +37,9 @@ class UserDao(private val dbHelper: DatabaseHelper) {
         return count
     }
 
+    //Retorna um Boolean ao invés de um User
+    //Queremos saber apenas se o usuário já votou,
+    //não importando seu prontuário ou nome.
     fun getByProntuario(prontuario: String): Boolean {
         val existe: Boolean
         val db = dbHelper.readableDatabase

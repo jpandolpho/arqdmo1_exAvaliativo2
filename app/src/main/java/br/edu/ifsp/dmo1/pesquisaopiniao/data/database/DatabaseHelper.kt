@@ -32,6 +32,7 @@ class DatabaseHelper(context: Context) :
         db.execSQL(CREATE_TABLE_VOTO_V1)
     }
 
+    //onUpgrade genérico, pois não será executado.
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL(DROP_TABLE_USER)
         db.execSQL(DROP_TABLE_VOTO)

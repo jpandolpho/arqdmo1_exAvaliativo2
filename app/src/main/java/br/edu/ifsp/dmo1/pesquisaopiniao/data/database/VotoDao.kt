@@ -14,6 +14,8 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         db.insert(DatabaseHelper.DATABASE_KEYS.TB_VOTO, null, values)
     }
 
+    //Retorna a opção que aquele código votou ou nulo, caso
+    //aquele código não seja encontrado no banco de dados.
     fun getByCodigo(codigo: String): String? {
         val opcao: String?
         val db = dbHelper.readableDatabase
@@ -44,6 +46,9 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         return opcao
     }
 
+    //Retorna uma lista de pares de String e Int
+    //Com este retorno, teremos uma lista do tipo
+    //{[Ótimo, 2],[Ruim,1]}
     fun getCountOfOpcao(): List<Pair<String, Int>> {
         val db = dbHelper.readableDatabase
 
@@ -74,5 +79,6 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
         return dados
     }
 
+    //gera um código aletório que representa o voto.
     fun generateCode() = Voto.generateCode()
 }
