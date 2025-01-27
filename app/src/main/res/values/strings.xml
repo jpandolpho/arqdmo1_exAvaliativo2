@@ -17,4 +17,5 @@
     <string name="results">Resultado</string>
     <string name="check_vote">Checar</string>
     <string name="verification_code">Codigo de Verificação</string>
+    <string name="vote_count">Total de Votos:</string>
 </resources>
