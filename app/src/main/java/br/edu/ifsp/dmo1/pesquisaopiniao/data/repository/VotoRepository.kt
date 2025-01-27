@@ -15,4 +15,6 @@ class VotoRepository(context: Context) {
     fun getVotoByCodigo(codigo: String) = dao.getByCodigo(codigo)
 
     fun getContagemByOpcao() = dao.getCountOfOpcao()
+
+    fun getCodigo() = dao.generateCode()
 }

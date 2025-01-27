@@ -59,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_login"
+        android:id="@+id/button_votar"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,14 +81,22 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH40" />
 
     <ImageView
+        android:id="@+id/copy_code"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/copy_code"
         android:src="@drawable/ic_copy"
-        app:layout_constraintStart_toEndOf="@id/text_codigo"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH40"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toEndOf="@id/text_codigo"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH40" />
+
+    <TextView
+        android:id="@+id/text_opcao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_voltar"

@@ -73,4 +73,6 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
 
         return dados
     }
+
+    fun generateCode() = Voto.generateCode()
 }
