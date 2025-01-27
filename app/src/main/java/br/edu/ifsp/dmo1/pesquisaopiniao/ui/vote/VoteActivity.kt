@@ -17,6 +17,7 @@ class VoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVoteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupListerners()
     }
