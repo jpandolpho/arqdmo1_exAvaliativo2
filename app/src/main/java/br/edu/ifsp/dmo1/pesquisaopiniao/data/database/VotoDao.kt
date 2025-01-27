@@ -49,7 +49,7 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
 
         val columns = arrayOf(
             DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO,
-            "COUNT(${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO})"
+            "COUNT(${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO}) AS CONTAGEM"
         )
 
         val cursor = db.query(
@@ -59,7 +59,7 @@ class VotoDao(private val dbHelper: DatabaseHelper) {
             null,
             "${DatabaseHelper.DATABASE_KEYS.VOTO_COL_OPCAO}",
             null,
-            null
+            "CONTAGEM DESC"
         )
         val dados = mutableListOf<Pair<String, Int>>()
 
